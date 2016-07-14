@@ -8,7 +8,7 @@
 module.exports = {
 	// User/add will add the var to the db
 	add: function(req, res){
-	var new_user = {first_name: 'Derek',last_name : 'Jeter',org : 'NYY'};
+	//var new_user = {first_name: 'Derek',last_name : 'Jeter',org : 'NYY'};
 
 	User.create(new_user).exec(function(err, result){
 		if (err) {
