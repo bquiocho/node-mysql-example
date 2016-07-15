@@ -18,30 +18,34 @@ module.exports = {
 	// 	return res.json(200, { success: 'Success' });
 	// });
 
-	var userObjToCreate = new Object();
-	userObjToCreate.first_name = req.body.first_name;
-	userObjToCreate.last_name = req.body.last_name;
-	userObjToCreate.org = req.body.org;
+	// check if first name or last name is valid
+	if (req.body.first_name === "" || req.body.last_name === ""){
+		console.log("First name or last name not valid");
+		res.status(400).send({error: 'Must include a valid first name and last name'});
+	}
+	else{
+		var userObjToCreate = new Object();
+		userObjToCreate.first_name = req.body.first_name;
+		userObjToCreate.last_name = req.body.last_name;
+		userObjToCreate.org = req.body.org;
 
+		console.log("req.body.first_name: " + userObjToCreate.first_name);
+		console.log("req.body.last_name: " + userObjToCreate.last_name);
+		console.log("req.body.org: " + userObjToCreate.org);
 
-	console.log("req.body.first_name: " + userObjToCreate.first_name);
-	console.log("req.body.last_name: " + userObjToCreate.last_name);
-	console.log("req.body.org: " + userObjToCreate.org);
+		var res_json = "Successfully added: "+userObjToCreate.first_name+" "+userObjToCreate.last_name +" to the database";
+		console.log(res_json);
 
-	//var new_user = {first_name: req_fn, last_name: req_ln,
-	//org: req_org};
+		User.create(userObjToCreate).exec(function(err, result){
+		if (err) {
+			sails.log.debug('Some error occured ' + err);
+			return res.json(500, { error: 'Some error occured' });
+		}
+		sails.log.debug('Success, result: ', JSON.stringify(result));
+		return res.json(200, { success: res_json });
+	});
+}
 
-	var res_json = "Successfully added: "+userObjToCreate.first_name+" "+userObjToCreate.last_name +" to the database";
-	console.log(res_json);
-
-	User.create(userObjToCreate).exec(function(err, result){
-	if (err) {
-		sails.log.debug('Some error occured ' + err);
-	 	return res.json(500, { error: 'Some error occured' });
- 	}
- 	sails.log.debug('Success, result: ', JSON.stringify(result));
-	return res.json(200, { success: res_json });
-});
 
 }
 
