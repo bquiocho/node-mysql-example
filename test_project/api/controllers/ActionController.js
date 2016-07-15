@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-	// Actions/add will add the var to the db
+	// localhost:1337/Action/add will add the var to the db
 	add: function(req, res){
 	//var new_action = {title: 'New Temp Action',due_date : '1994-07-22',description : 'This is a ' +
 	//'temporary action that was added...', user_id:3};

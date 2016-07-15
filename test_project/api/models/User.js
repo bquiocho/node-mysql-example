@@ -26,10 +26,15 @@ module.exports = {
     first_name: 'STRING',
     last_name: 'STRING',
     org: 'STRING',
-    // User/1/Actions 
+    // User/1/Actions
     actions: {
       collection: 'Action',
       via: 'user_id'
+    },
+    toJSON: function() {
+      var obj = this.toObject();
+      delete obj.password;
+      return obj;
     }
   }
 
