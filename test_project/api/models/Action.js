@@ -23,6 +23,11 @@ module.exports = {
     description: 'STRING',
     user_id: {
       model: 'User'
+    },
+    toJSON: function() {
+      var obj = this.toObject();
+      delete obj.password;
+      return obj;
     }
   }
 
