@@ -55,14 +55,17 @@ module.exports = {
 		query.first_name = first_name;
 		User.destroy(query).then(function(user) {
 			if(user.length > 0) {
-				req.flash('success', 'Successfully removed the User.');
+				console.log('Successfully removed the User.');
+				//req.flash('success', 'Successfully removed the User.');
 				//res.redirect('/console/teacher');
 			} else {
-				req.flash('error', 'Could not remove the user.');
+				console.log('Could not remove the user.');
+				//req.flash('error', 'Could not remove the user.');
 				//res.redirect('/console/teacher');
 			}
 		}).catch(function (err) {
-			req.flash('error', 'Could not remove the user.');
+			console.log('Could not remove the user.');
+			//req.flash('error', 'Could not remove the user.');
 			//res.redirect('/console/teacher');
 		});
 
